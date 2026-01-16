@@ -60,6 +60,7 @@ func atualizar_textos():
 	var selected_score = _calcular_score_selecionado_atual()
 	var round_score = manager.round_score
 	
+	# --- ATUALIZA P1 ---
 	if p1_name_lbl: p1_name_lbl.text = "Player 1"
 	if p1_total_lbl: p1_total_lbl.text = str(manager.score_p1)
 
@@ -70,13 +71,21 @@ func atualizar_textos():
 		p1_round_lbl.text = ""
 		p1_selected_lbl.text = ""
 
-	# --- ATUALIZA P2 ---
-	if p2_name_lbl: p2_name_lbl.text = "IA" if manager.is_vs_ai else "Player 2"
+	# --- ATUALIZA P2 (COM NOME DINÂMICO) ---
+	# 🆕 Pega o nome do Boss se for IA
+	var p2_display_name = "Player 2"
+	if manager.is_vs_ai and manager.ai_player:
+		if "boss_name" in manager.ai_player:
+			p2_display_name = manager.ai_player.boss_name
+		else:
+			p2_display_name = "IA" # Fallback
+	
+	if p2_name_lbl: p2_name_lbl.text = p2_display_name
 	if p2_total_lbl: p2_total_lbl.text = str(manager.score_p2)
 
 	# Verifica se é a vez do P2
 	if manager.current_state == GameManager.State.PLAYING_P2:
-		p2_round_lbl.text =  str(round_score)
+		p2_round_lbl.text = str(round_score)
 		p2_selected_lbl.text = str(selected_score) if selected_score > 0 else ""
 		
 		# Ajusta rotação da UI (se for humano vs humano local, vira a tela)

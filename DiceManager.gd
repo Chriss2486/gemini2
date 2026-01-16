@@ -181,7 +181,6 @@ func _check_hot_dice():
 			break
 	
 	if all_banked:
-		print("HOT DICE! Todos os 6 dados pontuaram. Rola tudo de novo!")
 		emit_signal("hot_dice_triggered")
 		for die in dice_data:
 			die["state"] = DieState.ACTIVE

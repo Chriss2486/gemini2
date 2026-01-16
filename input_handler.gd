@@ -41,7 +41,6 @@ func _start_touch(pos: Vector2):
 	touch_start_pos = pos
 	touch_start_time = Time.get_ticks_msec() / 1000.0
 	interaction_started.emit()
-	print("Input: Toque iniciado em ", pos)
 
 func _end_touch(pos: Vector2):
 	if not is_touching: return

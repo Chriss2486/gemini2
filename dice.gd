@@ -76,7 +76,6 @@ func verificar_parada():
 	# LÓGICA ANTI-EMPILHAMENTO
 	# Se o dado parou mas está flutuando muito acima da mesa, ele está em cima de outro dado
 	if global_position.y > altura_limite:
-		print("Dice: Detectado empilhamento. Aplicando força de fuga...")
 		resolver_empilhamento()
 		return 
 
@@ -191,3 +190,17 @@ func apply_skin(material_resource: Material):
 	material_skin_inicial = material_resource
 	if visual_mesh:
 		visual_mesh.set_surface_override_material(0, material_resource)
+
+# Adicione isso no final do script Dice.gd
+
+func preparar_para_impacto():
+	if is_banked: return # Se já está guardado na bandeja, não mexe
+	
+	freeze = false        # <--- O segredo: desliga o modo estático
+	sleeping = false      # Acorda o corpo físico
+	is_rolling = true     # Volta a verificar se parou no _process
+	stop_timer = 0.0      # Reseta o timer de parada
+	input_ray_pickable = false # Impede clique enquanto estiver voando
+	
+	# Opcional: Desliga o outline se estiver selecionado, pra não ficar estranho voando
+	# if outline_mesh: outline_mesh.hide()

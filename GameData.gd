@@ -47,7 +47,6 @@ func get_material_for_die(die_index: int) -> Material:
 	if ResourceLoader.exists(path):
 		var loaded_material = load(path)
 		_material_cache[path] = loaded_material # Guarda no "baú" (cache)
-		print("[GameData] Material carregado pela primeira vez: ", path)
 		return loaded_material
 	
 	return null
