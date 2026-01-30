@@ -2,8 +2,8 @@ extends PanelContainer
 
 @onready var number_list = $Panel/VBoxContainer/WheelContainer/NumberList
 @onready var scroll_container = $Panel/VBoxContainer/WheelContainer
-@onready var difficulty_container = $Panel/VBoxContainer/OptionButton
-@onready var difficulty_option: OptionButton = $Panel/VBoxContainer/OptionButton
+@onready var difficulty_container = $Panel/VBoxContainer/HBoxContainer
+@onready var difficulty_option: OptionButton = $Panel/VBoxContainer/HBoxContainer/OptionButton
 
 var custom_font = load("res://Almendra/Almendra-Regular.ttf")
 
